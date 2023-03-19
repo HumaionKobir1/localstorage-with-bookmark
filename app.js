@@ -16,7 +16,7 @@ const displayProduct = data => {
 
         card.innerHTML = `
         <div class="bookmark-icon">
-            <i class="fa-solid fa-bookmark"></i>
+            <i onclick="handleRemoveBookmark('${product.id}')" class="fa-solid fa-bookmark"></i>
             <i onclick="handleBookmark('${product.name}', '${product.id}', '${product.price}')" class="fa-regular fa-bookmark"></i>
         </div>
 
@@ -70,5 +70,14 @@ const handleBookmark = (name, id, price) => {
     }
     // console.log(previousBookmark);
 };
+
+
+const handleRemoveBookmark = id => {
+    const previousBookmark = JSON.parse(localStorage.getItem("bookmark"));
+    // console.log(previousBookmark);
+    const restOfThem = previousBookmark.filter((product) => product.id != id);
+    console.log(restOfThem);
+    localStorage.setItem("bookmark", JSON.stringify(restOfThem));
+}
 
 loadProduct();
